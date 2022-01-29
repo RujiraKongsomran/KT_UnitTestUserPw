@@ -19,7 +19,8 @@ object RegistrationUtil {
         if (username.isEmpty() || password.isEmpty()) return false
         if (username in existingUsers) return false
         if (password != confirmedPassword) return false
-        if (password.count { it.isDigit() } < 2) return false
+        if (password.count() < 6) return false
+        if (password[0].isLowerCase()) return false
         return true
     }
 }

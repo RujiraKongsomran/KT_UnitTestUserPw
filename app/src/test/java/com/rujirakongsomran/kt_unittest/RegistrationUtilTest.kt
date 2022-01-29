@@ -60,12 +60,33 @@ class RegistrationUtilTest {
 
     // password contain less than 2 digits
     @Test
-    fun `less than 2 digits password return false`() {
+    fun `less than 6 digits password return false`() {
         val result = RegistrationUtil.validateRegistrationInput(
             "Biwberry",
-            "a",
-            "a"
+            "abc12",
+            "abc12"
         )
         assertThat(result).isFalse()
+    }
+
+
+    @Test
+    fun `give first digit of password is lowercase then failed`() {
+        val result = RegistrationUtil.validateRegistrationInput(
+            "Biwberry",
+            "abc123",
+            "abc123"
+        )
+        assertThat(result).isFalse()
+    }
+
+    @Test
+    fun `give first digit of password is uppercase then success`() {
+        val result = RegistrationUtil.validateRegistrationInput(
+            "Biwberry",
+            "Abc",
+            "Abc"
+        )
+        assertThat(result).isTrue()
     }
 }
